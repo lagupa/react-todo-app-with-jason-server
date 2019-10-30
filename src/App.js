@@ -1,5 +1,6 @@
 import './App.css';
 import React, { Component } from 'react'
+import TodoForm from './compoents/TodoForm'
 
 export class App extends Component {
   state = {
@@ -104,20 +105,12 @@ export class App extends Component {
     return (
       <div className="App container pt-4">
         <h1>{this.state.message}</h1>
-        <form onSubmit={(event) =>
-          this.handleSubmit(event)
-        } >
-          <div className="form-group">
-            <label htmlFor="">Enter Todo</label>
-            <input
-              type="text"
-              name="todo" id="todo" className="form-control" placeholder="Enter todo"
-              onChange={(event) => this.handleOnChange(event)}
-              value={this.state.newTodo}
-            />
-          </div>
-          <button className="btn btn-primary" type="submit">Add</button>
-        </form>
+        <TodoForm
+          handleSubmit={this.handleSubmit.bind(this)}
+          handleOnChange={this.handleOnChange.bind(this)}
+          value={this.state.newTodo}
+        />
+
 
         <div className="pt-4 todo-container">
 

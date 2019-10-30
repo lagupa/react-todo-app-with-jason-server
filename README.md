@@ -17,9 +17,11 @@
 * [x] - Show the todos in a list in a browser
 * [x] - add Check input to show done on the todo to mark it
 * [x] - Show a line through the todo text
-* [] - Add a button to remove a todo
-* [] - Add a button to mark all todos as done
-* [] - What are components...
+* [x] - Add a button to remove a todo
+* [x] - Add a button to mark all todos as done
+* [x] - What are components...
+* [x] - Create a component for the new todo form and pass on to all the relevant props
+
 
 
 
