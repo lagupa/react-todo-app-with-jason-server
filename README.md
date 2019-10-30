@@ -21,6 +21,8 @@
 * [x] - Add a button to mark all todos as done
 * [x] - What are components...
 * [x] - Create a component for the new todo form and pass on to all the relevant props
+* [x] - Create todoItem in TodoList components and pass their respective props down the chain
+
 
 
 

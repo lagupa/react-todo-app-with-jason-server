@@ -12,7 +12,7 @@ const TodoForm = (props) => {
                     <input
                         type="text"
                         name="todo" id="todo" className="form-control" placeholder="Enter todo"
-                        value={props.newTodo}
+                        value={props.newTodoValue}
                         onChange={(event) => props.handleOnChange(event)}
                     />
                 </div>

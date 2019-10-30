@@ -1,6 +1,7 @@
 import './App.css';
 import React, { Component } from 'react'
 import TodoForm from './compoents/TodoForm'
+import TodoList from './compoents/TodoList'
 
 export class App extends Component {
   state = {
@@ -27,7 +28,7 @@ export class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log(this.state.newTodo)
+    // console.log(this.state.newTodo)
 
     this.setState({
       newTodo: '', // clear the input button, make sure you set the value of the input to this value of newTodo
@@ -42,7 +43,7 @@ export class App extends Component {
   }
 
   toggleTodoDone(event, index) {
-    console.log(event.target.checked)
+    // console.log(event.target.checked)
 
     const todos = [...this.state.todos] //make copy the array
 
@@ -64,40 +65,34 @@ export class App extends Component {
     // --------------------------
 
 
-    console.log(todos)
+    // console.log(todos)
     this.setState({
       todos
     })
   }
   removeTodo(event, index) {
 
-    console.log(event.target.checked)
+    // console.log(event.target.checked)
     const todos = [...this.state.todos] //make copy the 
-
     // use the splice method to remove a todo
     todos.splice(index, 1)
-
-    console.log(todos)
-
+    // console.log(todos)
     this.setState({
       todos
     })
   }
 
   allDone(event) {
-    console.log("all done executed!...")
-
+    // console.log("all done executed!...")
     const todos = this.state.todos.map(todo => {
       return {
         ...todo,
         done: true
       }
     })
-
     this.setState({
       todos
     })
-
   }
 
 
@@ -108,33 +103,14 @@ export class App extends Component {
         <TodoForm
           handleSubmit={this.handleSubmit.bind(this)}
           handleOnChange={this.handleOnChange.bind(this)}
-          value={this.state.newTodo}
+          newTodoValue={this.state.newTodo}
         />
-
-
         <div className="pt-4 todo-container">
-
-          < ul >
-            {this.state.todos.map((todo, index) => (
-              <li key={todo.title}>
-                <input
-                  type="checkbox"
-                  onChange={(event) => this.toggleTodoDone(event, index)}
-                  checked={todo.done}
-                />
-                <span className={todo.done ? "done" : 'not-done'}>{todo.title}</span>
-                <span className="delete-todo">
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={(event) => this.removeTodo(event, index)}
-                  >
-                    x
-                  </button>
-                </span>
-              </li>
-
-            ))
-            } </ul>
+          <TodoList
+            toggleTodoDone={this.toggleTodoDone.bind(this)}
+            todos={this.state.todos}
+            removeTodo={this.removeTodo.bind(this)}
+          />
           <button
             onClick={(event) => this.allDone(event)}
             className="btn btn-success"
