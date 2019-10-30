@@ -1,6 +1,7 @@
 # Create A React Todo App With Jason Server as backend database
 
 ## Check List
+### Front End: React Part...
 * [x] - Create a React todo App
 * [x] - Render a message in App component
 * [x] - Render msg from state 
@@ -22,6 +23,58 @@
 * [x] - What are components...
 * [x] - Create a component for the new todo form and pass on to all the relevant props
 * [x] - Create todoItem in TodoList components and pass their respective props down the chain
+
+### Simple JSON Server for Backend storage of the todo items
+
+[x] Setup JSON Server for API endpoint
+    [x] Install jSON server `npm install -g json-server`
+    [x] Create a db.json file with some data
+
+    ```json 
+    {
+        "todos": [
+            {
+                "id": 1,
+                "title": "setting up json-server",
+                "done": false
+            },
+            {
+                "id": 2,
+                "title": "connecting react fron end to json server",
+                "done": false
+            },
+            {
+                "id": 3,
+                "title": "setup axios for connecting react and json server",
+                "done": false
+            }
+        ]
+    }
+    ```
+    [x] Start JSON Server `json-server --watch db.json`
+
+At this point you should see at `http://localhost:3000/todos`
+
+```json
+[
+  {
+    "id": 1,
+    "title": "setting up json-server",
+    "done": false
+  },
+  {
+    "id": 2,
+    "title": "connecting react fron end to json server",
+    "done": false
+  },
+  {
+    "id": 3,
+    "title": "setup axios for connecting react and json server",
+    "done": false
+  }
+]
+```
+
 
 
 
