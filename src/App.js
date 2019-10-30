@@ -3,16 +3,44 @@ import React, { Component } from 'react'
 
 export class App extends Component {
   state = {
-    message: "Hello React App with Json Server!"
+    message: "Hello React App with Json Server!",
+    newTodo: '',
+    todos: [
+      {
+        title: 'I am coding in react',
+        done: false
+      },
+      {
+        title: 'Learning CSS for React',
+        done: false
+      },
+      {
+        title: 'Recording youtube tutorials',
+        done: false
+      }
+    ]
   }
 
   handleOnChange(event) {
-    console.log(event.target.value)
+    // console.log(event.target.value)
+    this.setState({
+      newTodo: event.target.value
+    })
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log("form submited")
+    console.log(this.state.newTodo)
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        {
+          title: this.state.newTodo,
+          done: false
+        }
+      ]
+    })
+
   }
 
 
@@ -29,11 +57,20 @@ export class App extends Component {
               type="text"
               name="todo" id="todo" className="form-control" placeholder="Enter todo"
               onChange={(event) => this.handleOnChange(event)}
+
             />
           </div>
           <button className="btn btn-primary" type="submit">Add</button>
         </form>
-      </div>
+        <div className="pt-4 todo-container">
+          {this.state.todos.map(todo => (
+            < ul key={todo.title}>
+              <li>{todo.title}</li>
+            </ul>
+          ))
+          }
+        </div>
+      </div >
     )
   }
 }
