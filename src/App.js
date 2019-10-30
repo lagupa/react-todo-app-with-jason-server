@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 
 export class App extends Component {
   state = {
-    message: "Hello React App with Json Server"
+    message: "Hello React App with Json Server!"
   }
   render() {
     return (
       <div className="App container pt-4">
-        <h1>React Todo App with JSON Server</h1>
+        <h1>{this.state.message}</h1>
       </div>
     )
   }

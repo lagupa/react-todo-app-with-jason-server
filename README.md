@@ -2,5 +2,11 @@
 
 ## Check List
 [x] - Create a React todo App
+
 [x] - Render a message in App component
-[] - Render msg from state 
+
+[x] - Render msg from state 
+
+
+
+
