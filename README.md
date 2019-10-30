@@ -15,8 +15,8 @@
 * [x] - Create an arrray of property on our state for todos
 * [x] - Add a nwe tod into the tods array fwith done: false
 * [x] - Show the todos in a list in a browser
-* [] - add Check input to show done on the todo to mark it
-* [] - Show a line through the todo text
+* [x] - add Check input to show done on the todo to mark it
+* [x] - Show a line through the todo text
 * [] - Add a button to remove a todo
 * [] - Add a button to mark all todos as done
 * [] - What are components...
