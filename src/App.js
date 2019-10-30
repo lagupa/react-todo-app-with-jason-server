@@ -40,7 +40,21 @@ export class App extends Component {
         }
       ]
     })
+  }
 
+  toggleTodoDone(event, index) {
+    console.log(event.target.checked)
+
+    const todos = [...this.state.todos] //make copy the array
+    todos[index] = { ...todos[index] } // make of the todo at the given index
+
+    todos[index].done = event.target.checked // update the done property of the copied todo
+
+    console.log(todos)
+
+    this.setState({
+      todos
+    })
   }
 
 
@@ -63,12 +77,24 @@ export class App extends Component {
           <button className="btn btn-primary" type="submit">Add</button>
         </form>
         <div className="pt-4 todo-container">
-          {this.state.todos.map(todo => (
-            < ul key={todo.title}>
-              <li>{todo.title}</li>
-            </ul>
-          ))
-          }
+
+          < ul >
+            {this.state.todos.map((todo, index) => (
+              <li key={todo.title}>
+                <input
+                  type="checkbox"
+                  onChange={(event) => this.toggleTodoDone(event, index)}
+                />
+                <span className={todo.done ? "done" : 'not-done'}>{todo.title}</span>
+
+                {/* <span style={{
+                  textDecoration: todo.done ? "line-through" : "inherit",
+                  paddingLeft: '1rem'
+                }}>{todo.title}</span> */}
+              </li>
+
+            ))
+            } </ul>
         </div>
       </div >
     )
