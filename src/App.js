@@ -9,6 +9,13 @@ export class App extends Component {
     return (
       <div className="App container pt-4">
         <h1>{this.state.message}</h1>
+        <form >
+          <div className="form-group">
+            <label htmlFor="">Enter Todo</label>
+            <input type="text" name="" id="" className="form-control" placeholder="" aria-describedby="helpId" />
+          </div>
+          <button className="btn btn-primary" type="submit">Add</button>
+        </form>
       </div>
     )
   }
