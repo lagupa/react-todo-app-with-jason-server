@@ -1,19 +1,24 @@
 {
-    "todos": [
-        {
-            "id": 1,
-            "title": "setting up json-server",
-            "done": false
-        },
-        {
-            "id": 2,
-            "title": "connecting react fron end to json server",
-            "done": false
-        },
-        {
-            "id": 3,
-            "title": "setup axios for connecting react and json server",
-            "done": false
-        }
-    ]
+  "todos": [
+    {
+      "title": "Mathmentics",
+      "done": false,
+      "id": 2
+    },
+    {
+      "title": "Going to swim",
+      "done": false,
+      "id": 3
+    },
+    {
+      "title": "Learning to swim",
+      "done": false,
+      "id": 4
+    },
+    {
+      "title": "Hello React App with Json Server!",
+      "done": true,
+      "id": 6
+    }
+  ]
 }

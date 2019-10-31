@@ -3,16 +3,17 @@ import TodoItem from './TodoItem'
 
 const TodoList = (props) => {
     // console.log(props)
+
     return (
         <div>
             < ul >
-                {props.todos.map((todo, index) => (
+                {props.todos.map((todo) => (
+
                     <TodoItem
-                        key={index}
-                        index={index}
+                        key={todo.id}
                         todo={todo}
-                        toggleTodoDone={props.toggleTodoDone}
-                        removeTodo={props.removeTodo}
+                        toggleTodoDone={() => props.toggleTodoDone(todo.id, todo.done)}
+                        removeTodo={() => props.removeTodo(todo.id)}
                     />
                 ))
                 }

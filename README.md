@@ -26,9 +26,9 @@
 
 ### Simple JSON Server for Backend storage of the todo items
 
-[x] Setup JSON Server for API endpoint
-    [x] Install jSON server `npm install -g json-server`
-    [x] Create a db.json file with some data
+* [x] Setup JSON Server for API endpoint
+    * [x] Install jSON server `npm install -g json-server`
+    * [x] Create a db.json file with some data
 
     ```json 
     {
@@ -51,7 +51,7 @@
         ]
     }
     ```
-    [x] Start JSON Server `json-server --watch db.json`
+    * [x] Start JSON Server `json-server --watch db.json`
 
 At this point you should see at `http://localhost:3000/todos`
 
@@ -74,6 +74,7 @@ At this point you should see at `http://localhost:3000/todos`
   }
 ]
 ```
+* [] - `npm install axios --save`
 
 
 

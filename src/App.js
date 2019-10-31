@@ -2,6 +2,9 @@ import './App.css';
 import React, { Component } from 'react'
 import TodoForm from './compoents/TodoForm'
 import TodoList from './compoents/TodoList'
+import TestForm from './compoents/TestForm'
+import axios from 'axios'
+
 
 export class App extends Component {
   state = {
@@ -9,81 +12,125 @@ export class App extends Component {
     newTodo: '',
     todos: [
       {
-        title: 'Learning CSS for React',
-        done: false
-      },
-      {
-        title: 'Recording youtube tutorials',
+        id: '',
+        title: '',
         done: false
       }
     ]
   }
 
-  handleOnChange(event) {
+
+
+
+  fetchTodos = () => {
+    axios.get(`http://localhost:3000/todos`)
+      .then(res => {
+        // console.log(res)
+        const todos = res.data;
+        // console.log(todos)
+        this.setState({
+          ...todos,
+          todos
+        });
+      })
+  }
+
+
+  componentDidMount() {
+    this.fetchTodos()
+  }
+
+
+
+
+  handleOnChange = (event) => {
     // console.log(event.target.value)
     this.setState({
-      newTodo: event.target.value
+      newTodo: event.target.value,
+      // id: event.target.value
     })
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault()
-    // console.log(this.state.newTodo)
 
-    this.setState({
-      newTodo: '', // clear the input button, make sure you set the value of the input to this value of newTodo
-      todos: [
-        ...this.state.todos,
-        {
-          title: this.state.newTodo,
-          done: false
-        }
-      ]
+    // Save data on to json db
+    axios.post(`http://localhost:3000/todos`, {
+      title: this.state.newTodo,
+      done: false
     })
+      .then(res => {
+        // console.log(res.data);
+        this.setState({
+          newTodo: '',
+          todos: [
+            ...this.state.todos,
+            {
+              title: res.data.title,
+              done: res.data.done,
+              id: res.data.id
+            }
+          ]
+        })
+      })
   }
 
-  toggleTodoDone(event, index) {
-    // console.log(event.target.checked)
+  // toggleTodoDone = (dataId) => {
+  //   console.log(dataId)
+  // axios.patch(`http://localhost:3000/todos/${dataId}`, {
+  //   done: done
+  // })
+  //   .then(res => {
+  //     console.log(res);
+  //     // console.log(res.data);
+  //   })
+  // }
 
-    const todos = [...this.state.todos] //make copy the array
-
-    /* 
-    // Method 1 
-    // --------------------------
-    todos[index] = { ...todos[index] } // make of the todo at the given index, you can also object.assign()
-    todos[index].done = event.target.checked // update the done property of the copied todo
-    //-------------------------- 
-    */
-
-    // Method 2
-    // --------------------------
-    todos[index] = {
-      ...todos[index], // make copy of the array
-      // here make changes to the properties that have changed
-      done: event.target.checked
-    }
-    // --------------------------
-
-
-    // console.log(todos)
-    this.setState({
-      todos
+  toggleTodoDone = (id, status) => {
+    // // Delete data from backend 
+    axios.patch(`http://localhost:3000/todos/${id}`, {
+      done: !status
+    }).then(res => {
+      this.fetchTodos()
     })
-  }
-  removeTodo(event, index) {
 
-    // console.log(event.target.checked)
-    const todos = [...this.state.todos] //make copy the 
-    // use the splice method to remove a todo
-    todos.splice(index, 1)
-    // console.log(todos)
-    this.setState({
-      todos
-    })
-  }
+  };
 
-  allDone(event) {
-    // console.log("all done executed!...")
+  removeTodo = id => {
+    // Remove item from UI 
+    const todos = this.state.todos.filter(item => item.id !== id);
+    this.setState({ todos });
+
+    // Delete data from backend 
+    axios.delete(`http://localhost:3000/todos/${id}`)
+      .then(res => {
+        console.log(res.data);
+
+      })
+  };
+
+  // // THIS FUCKEN THING WITH SPLICE DOESN'T WANT TO WORK, IDIOT, IT KILLED MY WHOLE DAY, FUCK!!!
+  // removeTodo = (id) => {
+  //   //  clear the data from UI
+  //   const todos = [...this.state.todos]
+  //   todos.splice(id, -1)
+  //   this.setState({
+  //     todos
+  //   })
+  //   console.log(id)
+  //   // // Delete data from backend 
+  //   // axios.delete(`http://localhost:3000/todos/${id}`)
+  //   //   .then(res => {
+  //   //     // // console.log(res.data);
+  //   //     // const todos = [...this.state.todos]
+  //   //     // todos.splice(id, 1)
+  //   //     // this.setState({
+  //   //     //   todos
+  //   //     // })
+  //   //   })
+  // }
+
+  allDone = (event) => {
     const todos = this.state.todos.map(todo => {
       return {
         ...todo,
@@ -97,27 +144,30 @@ export class App extends Component {
 
 
   render() {
+
     return (
       <div className="App container pt-4">
         <h1>{this.state.message}</h1>
         <TodoForm
-          handleSubmit={this.handleSubmit.bind(this)}
-          handleOnChange={this.handleOnChange.bind(this)}
+          handleSubmit={this.handleSubmit}
+          handleOnChange={this.handleOnChange}
           newTodoValue={this.state.newTodo}
         />
         <div className="pt-4 todo-container">
           <TodoList
-            toggleTodoDone={this.toggleTodoDone.bind(this)}
+            toggleTodoDone={this.toggleTodoDone}
             todos={this.state.todos}
-            removeTodo={this.removeTodo.bind(this)}
+            removeTodo={this.removeTodo}
+
           />
           <button
-            onClick={(event) => this.allDone(event)}
+            onClick={this.allDone}
             className="btn btn-success"
           >
             all done
           </button>
         </div>
+        <TestForm />
       </div >
     )
   }
